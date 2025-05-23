@@ -6,7 +6,7 @@
 /*   By: ngaurama <ngaurama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 19:26:05 by ngaurama          #+#    #+#             */
-/*   Updated: 2025/05/19 19:29:04 by ngaurama         ###   ########.fr       */
+/*   Updated: 2025/05/23 17:04:24 by ngaurama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,5 @@ FragTrap::~FragTrap()
 
 void FragTrap::highFivesGuys()
 {
-std::cout << "FragTrap " << name << " requests a high five! ✋" << std::endl;}
+    std::cout << "FragTrap " << name << " requests a high five!" << std::endl;
+}

@@ -6,7 +6,7 @@
 /*   By: ngaurama <ngaurama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 19:47:37 by ngaurama          #+#    #+#             */
-/*   Updated: 2025/05/19 22:31:06 by ngaurama         ###   ########.fr       */
+/*   Updated: 2025/05/23 18:03:44 by ngaurama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,20 @@
 DiamondTrap::DiamondTrap()
         : ClapTrap(), ScavTrap(), FragTrap(), name("Default")
 {
-    hitPoints = FragTrap::hitPoints;
-    energyPoints = ScavTrap::energyPoints;
-    attackDamage = FragTrap::attackDamage;
+    hitPoints = 100;//FragTrap::hitPoints;
+    energyPoints = 50;//ScavTrap::energyPoints;
+    attackDamage = 30;//FragTrap::attackDamage;
     std::cout << "DiamondTrap default constructor called for " << name << std::endl;
 }
 
 DiamondTrap::DiamondTrap(std::string name)
         : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name), name(name)
 {
-    hitPoints = FragTrap::hitPoints;
-    energyPoints = ScavTrap::energyPoints;
-    attackDamage = FragTrap::attackDamage;
+    hitPoints = 100;//FragTrap::hitPoints;
+    energyPoints = 50;//ScavTrap::energyPoints;
+    attackDamage = 30;//FragTrap::attackDamage;
     std::cout << "DiamondTrap String constructor called for " << name << std::endl;
+    std::cout << "Hipoints: " << hitPoints << "\nEnergy Points: " << energyPoints << "\nAttack Damage: " << attackDamage << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap& other) : ClapTrap(other), ScavTrap(other), FragTrap(other)
@@ -42,6 +43,9 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &copy)
     {
         ClapTrap::operator=(copy);
         this->name = copy.name;
+        hitPoints = copy.hitPoints;
+        energyPoints = copy.energyPoints;
+        attackDamage = copy.attackDamage;
     }
     std::cout << "DiamondTrap assignment operator called" << std::endl;
     return *this;
