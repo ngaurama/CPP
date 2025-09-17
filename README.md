@@ -9,8 +9,7 @@ A collection of C++ exercises from 42's Common Core curriculum, covering fundame
 
 ## Table of Contents
 <details>
-  <summary><b>Module 00: Namespaces, classes, member functions</b></summary>
-
+  <summary><span style="color:#00babc; font-weight:bold;"><b>Module 00: Namespaces, classes, member functions</b></span></summary>
   <h3>Exercises</h3>
   <p>- Exercise 00: Megaphone — String manipulation program</p>
   <p>- Exercise 01: My Awesome PhoneBook — Contact management system</p>
@@ -24,7 +23,7 @@ A collection of C++ exercises from 42's Common Core curriculum, covering fundame
 </details>
 
 <details>
-  <summary><b>Module 01: Memory allocation, references, pointers</b></summary>
+  <summary><span style="color:#00babc; font-weight:bold;"><b>Module 01: Memory allocation, references, pointers</b></span></summary>
 
   <h3>Exercises</h3>
   <p>- Exercise 00: BraiiiiiiinnnzzzZ — Zombie class with stack/heap allocation</p>
@@ -43,7 +42,7 @@ A collection of C++ exercises from 42's Common Core curriculum, covering fundame
 </details>
 
 <details>
-  <summary><b>Module 02: Ad-hoc polymorphism, operator overloading</b></summary>
+  <summary><span style="color:#00babc; font-weight:bold;"><b>Module 02: Ad-hoc polymorphism, operator overloading</b></span></summary>
 
   <h3>Exercises</h3>
   <p>- Exercise 00: My First Class in Orthodox Canonical Form — Fixed-point number class</p>
@@ -59,7 +58,7 @@ A collection of C++ exercises from 42's Common Core curriculum, covering fundame
 </details>
 
 <details>
-  <summary><b>Module 03: Inheritance</b></summary>
+  <summary><span style="color:#00babc; font-weight:bold;"><b>Module 03: Inheritance</b></span></summary>
 
   <h3>Exercises</h3>
   <p>- Exercise 00: Aaaaand... OPEN! — Base ClapTrap class</p>
@@ -75,7 +74,7 @@ A collection of C++ exercises from 42's Common Core curriculum, covering fundame
 </details>
 
 <details>
-  <summary><b>Module 04: Subtype polymorphism, abstract classes</b></summary>
+  <summary><span style="color:#00babc; font-weight:bold;"><b>Module 04: Subtype polymorphism, abstract classes</b></span></summary>
 
   <h3>Exercises</h3>
   <p>- Exercise 00: Polymorphism — Animal class hierarchy</p>
@@ -91,7 +90,7 @@ A collection of C++ exercises from 42's Common Core curriculum, covering fundame
 </details>
 
 <details>
-  <summary><b>Module 05: Repetition and exceptions</b></summary>
+  <summary><span style="color:#00babc; font-weight:bold;"><b>Module 05: Repetition and exceptions</b></span></summary>
 
   <h3>Exercises</h3>
   <p>- Exercise 00: Mommy, when I grow up, I want to be a bureaucrat! — Bureaucrat class with exceptions</p>
@@ -107,7 +106,7 @@ A collection of C++ exercises from 42's Common Core curriculum, covering fundame
 </details>
 
 <details>
-  <summary><b>Module 06: C++ casts</b></summary>
+  <summary><span style="color:#00babc; font-weight:bold;"><b>Module 06: C++ casts</b></span></summary>
 
   <h3>Exercises</h3>
   <p>- Exercise 00: Conversion of scalar types — Type conversion class</p>
@@ -122,7 +121,7 @@ A collection of C++ exercises from 42's Common Core curriculum, covering fundame
 </details>
 
 <details>
-  <summary><b>Module 07: C++ templates</b></summary>
+  <summary><span style="color:#00babc; font-weight:bold;"><b>Module 07: C++ templates</b></span></summary>
 
   <h3>Exercises</h3>
   <p>- Exercise 00: Start with a few functions — Function templates</p>
@@ -137,7 +136,7 @@ A collection of C++ exercises from 42's Common Core curriculum, covering fundame
 </details>
 
 <details>
-  <summary><b>Module 08: Templated containers, iterators, algorithms</b></summary>
+  <summary><span style="color:#00babc; font-weight:bold;"><b>Module 08: Templated containers, iterators, algorithms</b></span></summary>
 
   <h3>Exercises</h3>
   <p>- Exercise 00: Easy find — Container searching algorithm</p>
@@ -152,7 +151,7 @@ A collection of C++ exercises from 42's Common Core curriculum, covering fundame
 </details>
 
 <details>
-  <summary><b>Module 09: STL</b></summary>
+  <summary><span style="color:#00babc; font-weight:bold;"><b>Module 09: STL</b></span></summary>
 
   <h3>Exercises</h3>
   <p>- Exercise 00: Bitcoin Exchange — Cryptocurrency value calculator</p>
