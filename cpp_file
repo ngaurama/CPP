@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# ---- Argument Parsing ----
+if [ "$#" -lt 1 ]; then
+    echo "Usage: $0 <Class1> [Class2] [Class3] ..."
+    exit 1
+fi
+
+CLASS_NAMES=("$@")
+
+# ---- Function to add 42 header using Vim ----
+add_header() {
+  local file="$1"
+  touch "$file"
+  vim -c ':Stdheader' -c ':wq' "$file"
+}
+
+# ---- Header and Source files ----
+for class in "${CLASS_NAMES[@]}"; do
+  HEADER="./${class}.hpp"
+  SOURCE="./${class}.cpp"
+  GUARD=$(echo "${class}_HPP" | tr '[:lower:]' '[:upper:]')
+
+  # .hpp
+  add_header "$HEADER"
+  truncate -s -1 "$HEADER"
+  {
+    echo "#ifndef $GUARD"
+    echo "#define $GUARD"
+    echo ""
+    echo "#include <iostream>"
+    echo "#include <string>"
+    echo ""
+    echo "class $class"
+    echo "{"
+    echo "public:"
+    echo "    $class();"
+    echo "    $class(const $class& copy);"
+    echo "    $class& operator=(const $class& copy);"
+    echo "    ~$class();"
+    echo "};"
+    echo ""
+    echo "#endif // $GUARD"
+  } >> "$HEADER"
+
+  # .cpp
+  add_header "$SOURCE"
+  truncate -s -1 "$SOURCE"
+  {
+    echo "#include \"${class}.hpp\""
+    echo ""
+    echo "$class::$class()"
+    echo "{"
+    echo "    std::cout << \"$class constructor called\" << std::endl;"
+    echo "}"
+    echo ""
+    echo "$class::$class(const $class& other)"
+    echo "{"
+    echo "    std::cout << \"$class copy constructor called\" << std::endl;"
+    echo "    *this = other;"
+    echo "}"
+    echo ""
+    echo "$class& $class::operator=(const $class& other)"
+    echo "{"
+    echo "    std::cout << \"$class copy assignment operator called\" << std::endl;"
+    echo "    if (this != &other)"
+    echo "    {"
+    echo "        // copy fields here"
+    echo "    }"
+    echo "    return *this;"
+    echo "}"
+    echo ""
+    echo "$class::~$class()"
+    echo "{"
+    echo "    std::cout << \"$class destructor called\" << std::endl;"
+    echo "}"
+  } >> "$SOURCE"
+done
+
+echo "Class files for classes: '${CLASS_NAMES[*]}' created successfully in the current directory!"

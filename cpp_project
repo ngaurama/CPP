@@ -1,0 +1,139 @@
+#!/bin/bash
+
+# ---- Argument Parsing ----
+if [ "$#" -lt 2 ]; then
+    echo "Usage: $0 <ProjectFolder> [Class1] [Class2] [Class3] ..."
+    exit 1
+fi
+
+PROJECT_DIR="$1"
+shift
+CLASS_NAMES=("$@")
+
+if [ -d "$PROJECT_DIR" ]; then
+    echo "Error: Directory '$PROJECT_DIR' already exists. Aborting."
+    exit 1
+fi
+
+mkdir -p "$PROJECT_DIR" || exit 1
+
+
+# ---- Function to add 42 header using Vim ----
+add_header() {
+  local file="$1"
+  touch "$file"
+  vim -c ':Stdheader' -c ':wq' "$file"
+}
+
+# ---- main.cpp ----
+MAIN_FILE="$PROJECT_DIR/main.cpp"
+add_header "$MAIN_FILE"
+truncate -s -1 "$MAIN_FILE"
+{
+  for class in "${CLASS_NAMES[@]}"; do
+    echo "#include \"${class}.hpp\""
+  done
+  echo ""
+  echo "int main()"
+  echo "{"
+  for class in "${CLASS_NAMES[@]}"; do
+    echo "    $class obj${class};"
+  done
+  echo "    return 0;"
+  echo "}"
+} >> "$MAIN_FILE"
+
+# ---- Header and Source files ----
+for class in "${CLASS_NAMES[@]}"; do
+  HEADER="$PROJECT_DIR/$class.hpp"
+  SOURCE="$PROJECT_DIR/$class.cpp"
+  GUARD=$(echo "${class}_HPP" | tr '[:lower:]' '[:upper:]')
+
+  # .hpp
+  add_header "$HEADER"
+  truncate -s -1 "$HEADER"
+  {
+    echo "#ifndef $GUARD"
+    echo "#define $GUARD"
+    echo ""
+    echo "#include <iostream>"
+    echo "#include <string>"
+    echo ""
+    echo "class $class"
+    echo "{"
+    echo "public:"
+    echo "    $class();"
+    echo "    $class(const $class& copy);"
+    echo "    $class& operator=(const $class& copy);"
+    echo "    ~$class();"
+    echo "};"
+    echo ""
+    echo "#endif // $GUARD"
+  } >> "$HEADER"
+
+  # .cpp
+  add_header "$SOURCE"
+  truncate -s -1 "$SOURCE"
+  {
+    echo "#include \"${class}.hpp\""
+    echo ""
+    echo "$class::$class()"
+    echo "{"
+    echo "    std::cout << \"$class constructor called\" << std::endl;"
+    echo "}"
+    echo ""
+    echo "$class::$class(const $class& other)"
+    echo "{"
+    echo "    std::cout << \"$class copy constructor called\" << std::endl;"
+    echo "    *this = other;"
+    echo "}"
+    echo ""
+    echo "$class& $class::operator=(const $class& other)"
+    echo "{"
+    echo "    std::cout << \"$class copy assignment operator called\" << std::endl;"
+    echo "    if (this != &other)"
+    echo "    {"
+    echo "        // copy fields here"
+    echo "    }"
+    echo "    return *this;"
+    echo "}"
+    echo ""
+    echo "$class::~$class()"
+    echo "{"
+    echo "    std::cout << \"$class destructor called\" << std::endl;"
+    echo "}"
+  } >> "$SOURCE"
+done
+
+# ---- Makefile ----
+MAKEFILE="$PROJECT_DIR/Makefile"
+add_header "$MAKEFILE"
+truncate -s -1 "$MAKEFILE"
+{
+  echo "CXX = c++"
+  echo "CXXFLAGS = -Wall -Wextra -Werror -std=c++98"
+  echo "NAME = ${PROJECT_DIR}"
+  echo -n "SRC = main.cpp"
+  for class in "${CLASS_NAMES[@]}"; do
+    echo -n " ${class}.cpp"
+  done
+  echo ""
+  echo "OBJ = \$(SRC:.cpp=.o)"
+  echo ""
+  echo "all: \$(NAME)"
+  echo ""
+  echo "\$(NAME): \$(OBJ)"
+  echo "	\$(CXX) \$(CXXFLAGS) -o \$(NAME) \$(OBJ)"
+  echo ""
+  echo "clean:"
+  echo "	rm -f \$(OBJ)"
+  echo ""
+  echo "fclean: clean"
+  echo "	rm -f \$(NAME)"
+  echo ""
+  echo "re: fclean all"
+  echo ""
+  echo ".PHONY: all clean fclean re"
+} >> "$MAKEFILE"
+
+echo "Project '$PROJECT_DIR' with classes: '"${CLASS_NAMES[*]}"' created successfully!"
